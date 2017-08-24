@@ -61,6 +61,12 @@ module Prawn
                                 :right_margin   => type["right_margin"])
 
       generate_grid @type
+      
+      # Option to load and customize fonts
+      if options[:fonts]
+        @document.font_families.update(options[:fonts])
+        @document.font options[:font]
+      end
 
       data.each_with_index do |record, index|
         if (defined? record.vertical_text)
