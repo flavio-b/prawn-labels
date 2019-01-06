@@ -41,9 +41,8 @@ module Prawn
     end
 
     def initialize(data, options = {}, &block)
-      unless @type = Labels.types[options[:type]]
-        raise "Label Type Unknown '#{options[:type]}'"
-      end
+      @type = Labels.types[options[:type]] || options[:type]
+      raise "Label Type Unknown '#{options[:type]}'" if @type.nil?
 
       type["paper_size"]  ||= "A4"
       type["top_margin"]  ||= 36
